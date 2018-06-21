@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-lg-6">
+                <img src="{{ asset('img/london-half.jpg') }}" class="img-fluid home-side-image"/>
+                <div class="home-side-titles">
+                    <h1>English Battle</h1>
+                    <h2 class="pt-2">Let's test your english level !</h2>
+                </div>
+                <div class="powered-by">Par Anna & Nicolas</div>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center align-items-center hp-form p-3">
+                <div>
+                    <h3>S'inscrire</h3>
+                    <h4>Entrez vos données d'identification</h4>
+
+                    {{ form_start(form) }}
+                        <div class="form-row">
+                            <div class="col-12 col-lg-6">
+                                <div class="input-group shadow-input align-items-center bg-white mb-3">
+                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control form-control-lg border-0 custom-form'}}) }}
+                                    <i class="fas fa-user form-icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="input-group shadow-input align-items-center bg-white mb-3">
+                                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control form-control-lg border-0 custom-form'}}) }}
+                                    <i class="fas fa-user form-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="sr-only">Email</label>
+                            <div class="input-group shadow-input align-items-center bg-white">
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control form-control-lg border-0 custom-form'}}) }}
+                                <i class="fas fa-envelope form-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-12 col-lg-6">
+                                <label for="password" class="sr-only">Mot de passe</label>
+                                <div class="input-group shadow-input align-items-center bg-white mb-3">
+                                    <input type="password" class="form-control form-control-lg border-0 custom-form"
+                                           name="password" id="password1" required="required"
+                                           placeholder="Entrez votre mot de passe">
+                                    <i class="fas fa-lock form-icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label for="password" class="sr-only">Confirmation de mot de passe</label>
+                                <div class="input-group shadow-input align-items-center bg-white mb-3">
+                                    <input type="password" class="form-control form-control-lg border-0 custom-form"
+                                           name="Confirm Password" id="password2" required="required"
+                                           placeholder="Confirmation de mot de passe">
+                                    <i class="fas fa-lock form-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ville" class="sr-only">Ville</label>
+                            <div class="input-group shadow-input align-items-center bg-white">
+                                {{ form_widget(form.ville, {'attr': {'class': 'form-control form-control-lg border-0 custom-form'}}) }}
+                                <i class="fas fa-globe form-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="niveau" class="sr-only">Niveau</label>
+                            <select class="input-group shadow-input custom-select bg-white" name="niveau" id="niveau">
+                                <option selected>Choisissez votre niveau...</option>
+                                <option value="débutant">Débutant</option>
+                                <option value="intermédiaire">Intermédiaire</option>
+                                <option value="expert">Confirmé</option>
+                            </select>
+                        </div>
+
+                        {{ form_widget(form.sign, {'attr': {'class': 'btn btn-blue btn-block custom-btn'}}) }}
+
+                        <small class="form-text">Déjà inscrit ? <strong><a href="{{ path('homepage') }}" class="text-blue">Je me connecte
+                                    !</a></strong></small>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block javascripts %}
+<script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+</script>
+
+<script type="text/javascript">
+    window.onload = function () {
+        document.getElementById("password1").onchange = validatePassword;
+        document.getElementById("password2").onchange = validatePassword;
+    }
+
+    function validatePassword() {
+        var pass2 = document.getElementById("password2").value;
+        var pass1 = document.getElementById("password1").value;
+        if (pass1 != pass2)
+            document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+        else
+            document.getElementById("password2").setCustomValidity('');
+        //empty string means no validation error
+    }
+</script>
+
+{% endblock %}

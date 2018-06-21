@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-lg-6">
+                <img src="{{ asset('img/london-half.jpg') }}" class="img-fluid home-side-image" />
+                <div class="home-side-titles">
+                    <h1>English Battle</h1>
+                    <h2 class="pt-2">Let's test your english level !</h2>
+                </div>
+                <div class="powered-by">Par Anna & Nicolas</div>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center align-items-center hp-form p-3">
+                <div>
+                    <h3>Se connecter</h3>
+                    <h4>Entrez vos données d'identification</h4>
+                    <form action="{{ path('login') }}" method="post" name="login">
+                        <div class="form-row">
+                            <div class="col-12 col-lg-6">
+                                <label for="email" class="sr-only">Email</label>
+                                <div class="input-group shadow-input align-items-center bg-white mb-3">
+                                    <input id="email" type="email" class="form-control form-control-lg border-0 custom-form" name="email" required="required" placeholder="Entrez votre email">
+                                    <i class="fas fa-user form-icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label for="password" class="sr-only">Mot de passe</label>
+                                <div class="input-group shadow-input align-items-center bg-white mb-3">
+                                    <input id="password" type="password" class="form-control form-control-lg border-0 custom-form" required="required" placeholder="Entrez votre mot de passe" name="password">
+                                    <i class="fas fa-lock form-icon"></i>
+                                </div>
+                            </div>
+
+                            {% if errorLogin is defined and errorLogin %}
+                                <span class="text-danger">L'email et / ou le mot de passe ne sont pas correctes</span><br/>
+                            {% endif%}
+                        </div>
+                        <button type="submit" value="login" name="logIn" class="btn btn-blue btn-block custom-btn btn-connect">Je me connecte !</button>
+                        <small class="form-text">Pas encore de compte ? <strong><a href="{{ path('signup') }}" class="text-blue">Je m'inscris !</a></strong></small>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+
+</script>
+{% endblock %}

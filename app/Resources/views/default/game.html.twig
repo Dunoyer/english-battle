@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-lg-6">
+                <img src="{{ asset('img/london-half.jpg') }}" class="img-fluid home-side-image"/>
+                <div id="logout"><a href="{{ path('homepage') }}" role="button" class="btn btn-light text-blue rounded-0">Se
+                        déconnecter</a></div>
+                <div class="home-side-titles">
+                    <h2> A vous de jouer {{ joueur.prenom }} {{ joueur.nom }} !</h2>
+                    <h1>Verbe : {{ verbe.baseVerbale }}
+                        ({{ verbe.traduction }})</h1>
+                    <form action="{{ path('correction') }}" method="post" name="question">
+                        <input type="hidden" name="id_joueur" value="{{ joueur.id }}"/>
+                        <input type="hidden" name="id_verbe" value="{{ verbe.id }}"/>
+
+                        <label class="text-white">Preterit</label>
+                        <div class="input-group shadow-input align-items-center bg-white mb-3">
+                            <input type="text" name="preterit" required="required"
+                                   class="form-control form-control-lg border-0 custom-form"/>
+                        </div>
+                        <label class="text-white">Participe passé</label>
+                        <div class="input-group shadow-input align-items-center bg-white mb-3">
+                            <input type="text" name="participePasse" required="required"
+                                   class="form-control form-control-lg border-0 custom-form"/>
+                        </div>
+
+
+                        <button type="submit" value="Envoyer" id="submit" name="envoyer"
+                                class="btn btn-blue btn-block custom-btn">Envoyer !
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
+                <h1 class="text-blue mb-3"> Score: {{ score }} !</h1>
+
+                {% if score >= 5 %}
+                    <span> Félicitation ! vous avez fait plus de 5 bonnes réponses youpi :)</span>
+                {% endif %}
+                <progress value="0" max="10" id="timer"></progress>
+            </div>
+        </div>
+    </div>
+{% endblock body%}
+
+
+{% block javascripts %}
+<script type="text/javascript">
+    // Set the date we're counting down to
+    var timeLeft = 10;
+
+    var counter = setInterval(function(){
+        document.getElementById("timer").value = 10 - --timeLeft;
+        if(timeLeft <= 0){
+            clearInterval(counter);
+            document.location.href='{{ path('homepage') }}';
+        }
+
+    },1000);
+</script>
+{% endblock %}
